@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -21,6 +22,8 @@ public class selectPage extends AppCompatActivity {
     String[] hotelVANwithPrice={"VANhotelA   $15/Night","VANhotelB  $25/Night"};
     int[] hotelVANPrice={15,25};
     String[] hotelVAN={"VANhotelA","VANhotelB"};
+
+
 
     Bundle bundle=new Bundle();
 
@@ -91,7 +94,9 @@ public class selectPage extends AppCompatActivity {
             }
         }
         else if(pagePurpose.equals("sight")){
-
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, cities);
+            lv.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
+            lv.setAdapter(adapter);
         }
     }
 }

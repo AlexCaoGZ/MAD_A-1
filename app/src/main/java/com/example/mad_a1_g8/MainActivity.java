@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         //buttons
         Button btnAdd=findViewById(R.id.btnAdd);
         Button btnHotel=findViewById(R.id.btnHotel);
+        Button btnSight=findViewById(R.id.btnSight);
 
         //the button that go to add.java
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +96,23 @@ public class MainActivity extends AppCompatActivity {
                 Bundle extras=new Bundle();
                 extras.putString("Purpose",Purpose);
                 extras.putString("dest",dest);
+                extras.putInt("ticketPrice",ticketPrice);
+                intent.putExtra("bundle",extras);
+                startActivity(intent);
+            }
+        });
+
+        btnSight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,selectPage.class);
+                String Purpose="sight";
+                Bundle extras=new Bundle();
+                extras.putString("Purpose",Purpose);
+                extras.putString("dest",dest);
+                extras.putString("hotel",hotel);
+                extras.putInt("hotelNigths",hotelNigths);
+                extras.putInt("hotelPrice",hotelPrice);
                 extras.putInt("ticketPrice",ticketPrice);
                 intent.putExtra("bundle",extras);
                 startActivity(intent);
