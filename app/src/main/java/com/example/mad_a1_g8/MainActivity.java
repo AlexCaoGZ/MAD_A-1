@@ -6,11 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     String dest="na";
     String hotel="na";
+    int ticketPrice=0;
+    int hotelPrice=0;
+    int hotelNigths=0;
 
     Bundle bundle=new Bundle();
 
@@ -19,19 +25,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //resume datas
-        if(savedInstanceState != null)
-        {
-            dest = (String)savedInstanceState.getString("dest");
-            hotel = (String)savedInstanceState.getString("hotel");
-        }
-
         //recive the data that come from other activity
         Intent intent = getIntent();
         if(intent.hasExtra("bundle")) {
             bundle = intent.getBundleExtra("bundle");
             dest=bundle.getString("dest");
             hotel=bundle.getString("hotel");
+            ticketPrice=bundle.getInt("ticketPrice");
+            hotelPrice=bundle.getInt("hotelPrice");
         }
 
         if(!dest.equals("na")){
@@ -40,7 +41,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         TextView tvCity=findViewById(R.id.tvCity);
+        TextView tvTicketPrice=findViewById(R.id.tvTicketPrice);
         TextView tvHotle=findViewById(R.id.tvHotle);
+        TextView tvHotlePrice=findViewById(R.id.tvHotlePrice);
+        TextView tvHotleNights=findViewById(R.id.tvHotleNights);
+        SeekBar sbNights=(SeekBar)findViewById(R.id.nightsSeekBar);
+
+        sbNights.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                hotelNigths=i;
+                tvHotleNights.setText(String.valueOf(hotelNigths));
+                tvHotlePrice.setText(String.valueOf(hotelNigths*hotelPrice));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        tvTicketPrice.setText(String.valueOf(ticketPrice));
         tvCity.setText(dest);
         tvHotle.setText(hotel);
 
@@ -69,17 +95,11 @@ public class MainActivity extends AppCompatActivity {
                 Bundle extras=new Bundle();
                 extras.putString("Purpose",Purpose);
                 extras.putString("dest",dest);
+                extras.putInt("ticketPrice",ticketPrice);
                 intent.putExtra("bundle",extras);
                 startActivity(intent);
             }
         });
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
-        super.onSaveInstanceState(outState);
-        outState.putString("dest", dest);
-        outState.putString("hotel", hotel);
-    }
 }
