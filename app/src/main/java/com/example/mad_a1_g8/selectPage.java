@@ -133,7 +133,7 @@ public class selectPage extends AppCompatActivity {
                         int sightPrice=0;
                         //Since we only have 2 datas, so I decide to do this in a stupid way
                         if(arrayList.contains(sightTOR[0])) sightPrice=sightPrice+sightTORPrice[0];
-                        else if(arrayList.contains(sightTOR[1])) sightPrice=sightPrice+sightTORPrice[1];
+                        if(arrayList.contains(sightTOR[1])) sightPrice=sightPrice+sightTORPrice[1];
 
                         bundle.putStringArrayList("list",arrayList);
                         bundle.putInt("sightPrice",sightPrice);
@@ -168,7 +168,7 @@ public class selectPage extends AppCompatActivity {
                         int sightPrice=0;
                         //Since we only have 2 datas, so I decide to do this in a stupid way
                         if(arrayList.contains(sightVAN[0])) sightPrice=sightPrice+sightVANPrice[0];
-                        else if(arrayList.contains(sightVAN[1])) sightPrice=sightPrice+sightVANPrice[1];
+                        if(arrayList.contains(sightVAN[1])) sightPrice=sightPrice+sightVANPrice[1];
 
                         bundle.putStringArrayList("list",arrayList);
                         bundle.putInt("sightPrice",sightPrice);

@@ -169,9 +169,24 @@
             android:layout_height="wrap_content"
             android:text="Add Sight" />
 
-        <ListView
+        <TextView
+            android:id="@+id/textView7"
             android:layout_width="match_parent"
-            android:layout_height="101dp" />
+            android:layout_height="wrap_content"
+            android:text="You will go to:"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:id="@+id/lvM"
+            android:layout_width="match_parent"
+            android:layout_height="416dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Summary" />
 
     </LinearLayout>
 

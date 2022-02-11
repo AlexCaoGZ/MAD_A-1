@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     String dest="na";
@@ -20,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     int sightPrice=0;
 
     Bundle bundle=new Bundle();
+    ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +40,24 @@ public class MainActivity extends AppCompatActivity {
             ticketPrice=bundle.getInt("ticketPrice");
             hotelPrice=bundle.getInt("hotelPrice");
             sightPrice=bundle.getInt("sightPrice");
+            hotelNigths=bundle.getInt("hotelNigths");
+            arrayList=bundle.getStringArrayList("list");
         }
 
         if(!dest.equals("na")){
             if(dest.startsWith("Tor")) dest="Toronto";
             else if(dest.startsWith("Van")) dest="Vancouver";
+        }
+
+        ListView lvM=null;
+        ArrayAdapter<String> adapter=null;
+        TextView textView7=findViewById(R.id.textView7);
+
+        if(arrayList!=null){
+            textView7.setVisibility(TextView.VISIBLE);
+            lvM = findViewById(R.id.lvM);
+            adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_dropdown_item_1line,arrayList);
+            lvM.setAdapter(adapter);
         }
 
         TextView tvCity=findViewById(R.id.tvCity);
@@ -50,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         TextView tvSightPrice=findViewById(R.id.tvSightPrice);
 
         SeekBar sbNights=(SeekBar)findViewById(R.id.nightsSeekBar);
+
+        sbNights.setProgress(hotelNigths);
+        tvHotleNights.setText(String.valueOf(hotelNigths));
+        tvHotlePrice.setText(String.valueOf(hotelNigths*hotelPrice));
 
         sbNights.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -119,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 extras.putInt("hotelNigths",hotelNigths);
                 extras.putInt("hotelPrice",hotelPrice);
                 extras.putInt("ticketPrice",ticketPrice);
+                extras.putInt("hotelNigths",hotelNigths);
                 intent.putExtra("bundle",extras);
                 startActivity(intent);
             }
