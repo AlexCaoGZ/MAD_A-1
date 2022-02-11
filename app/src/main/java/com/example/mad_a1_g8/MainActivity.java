@@ -20,8 +20,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,15 +51,18 @@ public class MainActivity extends AppCompatActivity {
             arrayList=bundle.getStringArrayList("list");
         }
 
+        //Since the return String also contain the km and ticket price, we need to remove those stuff.
         if(!dest.equals("na")){
             if(dest.startsWith("Tor")) dest="Toronto";
             else if(dest.startsWith("Van")) dest="Vancouver";
         }
 
+        //set up our ListView for showing sights that user selected
         ListView lvM=null;
         ArrayAdapter<String> adapter=null;
         TextView textView7=findViewById(R.id.textView7);
 
+        //if user not select any sight yet, jump over this part.
         if(arrayList!=null){
             textView7.setVisibility(TextView.VISIBLE);
             lvM = findViewById(R.id.lvM);
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             lvM.setAdapter(adapter);
         }
 
+        //get TextViews ready
         TextView tvCity=findViewById(R.id.tvCity);
         TextView tvTicketPrice=findViewById(R.id.tvTicketPrice);
         TextView tvHotle=findViewById(R.id.tvHotle);
@@ -76,12 +78,15 @@ public class MainActivity extends AppCompatActivity {
         TextView tvHotleNights=findViewById(R.id.tvHotleNights);
         TextView tvSightPrice=findViewById(R.id.tvSightPrice);
 
+        //SeekBar for selecting how many nights
         SeekBar sbNights=(SeekBar)findViewById(R.id.nightsSeekBar);
 
+        //for calculate the hotel's price
         sbNights.setProgress(hotelNigths);
         tvHotleNights.setText(String.valueOf(hotelNigths));
         tvHotlePrice.setText(String.valueOf(hotelNigths*hotelPrice));
 
+        //When the SeekBar move, the price that displayed on the screen will be updated
         sbNights.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -101,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //set the destination and hotle's name
         tvTicketPrice.setText(String.valueOf(ticketPrice));
         tvCity.setText(dest);
         tvHotle.setText(hotel);
@@ -112,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnSight=findViewById(R.id.btnSight);
         Button btnSummary=findViewById(R.id.btnSummary);
 
-        //the button that go to add.java
+        //the button that go to selectPage.java
+        //it will carry Purpose will it.
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //the button that go to hotel.java
+        //the button that go to selectPage.java, but in hotel selecting mode
+        //Since start a new activity will kill the old one, we need to carry those vars from the old one with us.
         btnHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Same stuff, but sight selecting mode this time.
         btnSight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,10 +166,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //basely is same stuff, goto summary.java
         btnSummary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(arrayList==null){
+                if(dest.equals("N/a")){
+                    //if the dest is not selected, we cant get into summary
+                    //you doesnt need hotel if you know someone in that city
+                    //you doesnt need to visit any sight
+                    //but you always need a ticket
+                    //unless you want to walk to there.
                     Toast.makeText(MainActivity.this,"You have many things not select.",Toast.LENGTH_LONG).show();
                 }
                 else {
