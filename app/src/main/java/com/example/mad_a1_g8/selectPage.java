@@ -71,7 +71,7 @@ public class selectPage extends AppCompatActivity {
                 }
             });
         } else if (pagePurpose.equals("hotel")) {
-            if (dest.equals("na")) {
+            if (dest.equals("N/a")) {
                 //dest did not selected, cant show the hotels
                 Toast.makeText(selectPage.this,"City didnt selected.",Toast.LENGTH_LONG).show();
             } else if (dest.equals("Toronto")) {

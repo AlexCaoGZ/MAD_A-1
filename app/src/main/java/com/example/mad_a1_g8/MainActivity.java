@@ -10,14 +10,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    String dest="na";
-    String hotel="na";
+    String dest="N/a";
+    String hotel="N/a";
     int ticketPrice=0;
     int hotelPrice=0;
     int hotelNigths=0;
@@ -151,16 +152,21 @@ public class MainActivity extends AppCompatActivity {
         btnSummary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,summary.class);
-                Bundle extras=new Bundle();
-                extras.putString("dest",dest);
-                extras.putString("hotel",hotel);
-                extras.putInt("hotelNigths",hotelNigths);
-                extras.putInt("hotelPrice",hotelPrice);
-                extras.putInt("ticketPrice",ticketPrice);
-                extras.putInt("hotelNigths",hotelNigths);
-                intent.putExtra("bundle",extras);
-                startActivity(intent);
+                if(arrayList==null){
+                    Toast.makeText(MainActivity.this,"You have many things not select.",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent = new Intent(MainActivity.this, summary.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("dest", dest);
+                    extras.putString("hotel", hotel);
+                    extras.putInt("hotelNigths", hotelNigths);
+                    extras.putInt("hotelPrice", hotelPrice);
+                    extras.putInt("ticketPrice", ticketPrice);
+                    extras.putInt("hotelNigths", hotelNigths);
+                    intent.putExtra("bundle", extras);
+                    startActivity(intent);
+                }
             }
         });
     }
