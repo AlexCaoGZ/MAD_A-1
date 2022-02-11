@@ -79,6 +79,8 @@ public class selectPage extends AppCompatActivity {
                     }
                 });
             }
+        }
+        else if(pagePurpose.equals("sight")){
 
         }
     }
