@@ -1,3 +1,11 @@
+/*  FILE            : MainActivity.java
+*   PROJECT         : PROG3150
+*   PROGRAMMER      : Justin Funk & Yutong Ji & Tong Mu & Zijia Cao
+*   FIRST VERSION   : 2022/02/09
+*   DESCRIPTION     : This file is the main screen of this Android
+*                     application, it has a lot of buttons to go to other Activity.
+*/
+
 package com.example.mad_a1_g8;
 
 import androidx.appcompat.app.AppCompatActivity;

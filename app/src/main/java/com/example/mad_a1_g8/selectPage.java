@@ -1,3 +1,10 @@
+/*  FILE            : selectPage.java
+ *  PROJECT         : PROG3150
+ *  PROGRAMMER      : Justin Funk & Yutong Ji & Tong Mu & Zijia Cao
+ *  FIRST VERSION   : 2022/02/09
+ *  DESCRIPTION     : This file is the selection screen of this Android application, it can
+ *                    show 3 different contents depending on the information contained in the intent.
+ */
 package com.example.mad_a1_g8;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class selectPage extends AppCompatActivity {
+    //we hardcode a lot things here
     private ListView lv;
     String[] cities={"Toronto    114Km  $11","Vancouver   4,171Km   $417"};
     int[] ticketPrice={11,417};
@@ -34,8 +42,6 @@ public class selectPage extends AppCompatActivity {
     String[] sightVANwithPrice={"VANsightA  $60","VANsightB $70"};
     int[] sightVANPrice={60,70};
 
-
-
     Bundle bundle=new Bundle();
 
     @Override
@@ -45,6 +51,7 @@ public class selectPage extends AppCompatActivity {
         String pagePurpose = "";
         String dest = "";
 
+        //get the intent, this activity only care about dest and pagePurpose
         Intent intent = getIntent();
         if (intent.hasExtra("bundle")) {
             bundle = intent.getBundleExtra("bundle");
@@ -52,14 +59,21 @@ public class selectPage extends AppCompatActivity {
             pagePurpose=bundle.getString("Purpose");
         }
 
+        //peparae our ListView
         lv = (ListView) findViewById(R.id.lv);
+
+        //This is the only button in this activity, it will only show up when adding sight
         Button btnAddSight=findViewById(R.id.btnAddSight);
 
-        if (pagePurpose.equals("dest")) {
+        //show different content based on "pagePurpose"
+        if (pagePurpose.equals("dest")) {   //selecting destination
+
+            //load the String[]cities into adapter, then load into ListView
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, cities);
             lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             lv.setAdapter(adapter);
 
+            //this Listener will return the destination to MainActivity
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -70,15 +84,19 @@ public class selectPage extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        } else if (pagePurpose.equals("hotel")) {
+        } else if (pagePurpose.equals("hotel")) {   //selecting hotel
+
             if (dest.equals("N/a")) {
                 //dest did not selected, cant show the hotels
                 Toast.makeText(selectPage.this,"City didnt selected.",Toast.LENGTH_LONG).show();
-            } else if (dest.equals("Toronto")) {
+            }
+            else if (dest.equals("Toronto")) {
+                //this time load the String[]hotel
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, hotelTORwithPrice);
                 lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 lv.setAdapter(adapter);
 
+                //return the selected hotel
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -89,11 +107,13 @@ public class selectPage extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-            } else if (dest.equals("Vancouver")) {
+            }
+            else if (dest.equals("Vancouver")) {
+                //Same stuff
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, hotelVANwithPrice);
                 lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 lv.setAdapter(adapter);
-
+                //Same stuff too
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -106,14 +126,20 @@ public class selectPage extends AppCompatActivity {
                 });
             }
         }
-        else if(pagePurpose.equals("sight")){
+        else if(pagePurpose.equals("sight")){   //selecting sight
+            //make our one and only button visible.
             btnAddSight.setVisibility(Button.VISIBLE);
+
             if(dest.equals("Toronto")){
+                //Same stuff
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, sightTORwithPrice);
                 lv.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                 lv.setAdapter(adapter);
+                //Creat a ArrayList for our selected sight, people may select many sight.
+                //although we only have two for them.
                 ArrayList<String> arrayList = new ArrayList<>();
 
+                //this Listener will add/remove the sight  from ArrayList
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -126,12 +152,13 @@ public class selectPage extends AppCompatActivity {
                     }
                 });
 
+                //this Listener will calculate the ticket's price, and return to MainActivity
                 btnAddSight.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(selectPage.this, MainActivity.class);
                         int sightPrice=0;
-                        //Since we only have 2 datas, so I decide to do this in a stupid way
+                        //Since we only have 2 opinions, so I decide to do this in a stupid way
                         if(arrayList.contains(sightTOR[0])) sightPrice=sightPrice+sightTORPrice[0];
                         if(arrayList.contains(sightTOR[1])) sightPrice=sightPrice+sightTORPrice[1];
 
@@ -143,7 +170,7 @@ public class selectPage extends AppCompatActivity {
                     }
                 });
             }
-            else if(dest.equals("Vancouver")){
+            else if(dest.equals("Vancouver")){ //Same stuff but for different city
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, sightVANwithPrice);
                 lv.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                 lv.setAdapter(adapter);
@@ -160,7 +187,7 @@ public class selectPage extends AppCompatActivity {
                         }
                     }
                 });
-
+                //Still same stuff
                 btnAddSight.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
