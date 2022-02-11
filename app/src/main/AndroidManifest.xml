@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MAD_A1_G8">
         <activity
+            android:name=".summary"
+            android:exported="false" />
+        <activity
             android:name=".selectPage"
             android:exported="false" />
         <activity
