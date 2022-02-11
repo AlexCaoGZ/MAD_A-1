@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     int ticketPrice=0;
     int hotelPrice=0;
     int hotelNigths=0;
+    int sightPrice=0;
 
     Bundle bundle=new Bundle();
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             hotel=bundle.getString("hotel");
             ticketPrice=bundle.getInt("ticketPrice");
             hotelPrice=bundle.getInt("hotelPrice");
+            sightPrice=bundle.getInt("sightPrice");
         }
 
         if(!dest.equals("na")){
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tvHotle=findViewById(R.id.tvHotle);
         TextView tvHotlePrice=findViewById(R.id.tvHotlePrice);
         TextView tvHotleNights=findViewById(R.id.tvHotleNights);
+        TextView tvSightPrice=findViewById(R.id.tvSightPrice);
+
         SeekBar sbNights=(SeekBar)findViewById(R.id.nightsSeekBar);
 
         sbNights.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         tvTicketPrice.setText(String.valueOf(ticketPrice));
         tvCity.setText(dest);
         tvHotle.setText(hotel);
+        tvSightPrice.setText(String.valueOf(sightPrice));
 
         //buttons
         Button btnAdd=findViewById(R.id.btnAdd);
