@@ -219,11 +219,13 @@ public class MainActivity extends AppCompatActivity {
         btnFindHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String link = "https://www.trivago.ca/?aDateRange%5Barr%5D=2022-03-27&aDateRange%5Bdep%5D=2022-03-28&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=24999%2F200&hasList=1&hasMap=1&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=";
+                Intent intent = new Intent(MainActivity.this,WebViewActivity.class);
+                startActivity(intent);
+                //String link = "https://www.trivago.ca/?aDateRange%5Barr%5D=2022-03-27&aDateRange%5Bdep%5D=2022-03-28&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=24999%2F200&hasList=1&hasMap=1&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=";
 
-                Intent openUrl = new Intent(Intent.ACTION_VIEW);
-                openUrl.setData(Uri.parse(link));
-                startActivity(openUrl);
+                //Intent openUrl = new Intent(Intent.ACTION_VIEW);
+                //openUrl.setData(Uri.parse(link));
+                //startActivity(openUrl);
             }
         });
 
