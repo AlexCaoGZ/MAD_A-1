@@ -8,10 +8,14 @@
 
 package com.example.mad_a1_g8;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrayList = new ArrayList<>();
 
     TextView tvTicketPrice=null;
+
+    StringBuilder sb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
                 extras.putInt("hotelPrice",hotelPrice);
                 extras.putInt("ticketPrice",ticketPrice);
                 extras.putInt("hotelNigths",hotelNigths);
+                extras.putInt("vehicle",vehicle);
                 intent.putExtra("bundle",extras);
                 startActivity(intent);
             }
@@ -260,7 +267,9 @@ public class MainActivity extends AppCompatActivity {
                     extras.putString("hotel", hotel);
                     extras.putInt("hotelNigths", hotelNigths);
                     extras.putInt("hotelPrice", hotelPrice);
+                    ticketPriceCalculator();
                     extras.putInt("ticketPrice", ticketPrice);
+                    extras.putInt("sightPrice",sightPrice);
                     extras.putInt("hotelNigths", hotelNigths);
                     intent.putExtra("bundle", extras);
                     startActivity(intent);
@@ -269,30 +278,60 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_menu,menu);
+        sb = new StringBuilder();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menuDatas){
+            Intent intent = new Intent(MainActivity.this, Database.class);
+            Bundle extras = new Bundle();
+            extras.putString("dest", dest);
+            extras.putString("hotel", hotel);
+            extras.putInt("hotelNigths", hotelNigths);
+            extras.putInt("hotelPrice", hotelPrice);
+            extras.putInt("sightPrice",sightPrice);
+            extras.putInt("hotelNigths", hotelNigths);
+            intent.putExtra("bundle", extras);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     void ticketPriceCalculator(){
         if(city!=0&&vehicle!=0){
             if(city==Constant.TOR){
                 switch (vehicle){
                     case Constant.BUS:
                         tvTicketPrice.setText("11");
+                        ticketPrice=11;
                         break;
                     case Constant.FLIGHT:
                         tvTicketPrice.setText("200");
+                        ticketPrice=200;
                         break;
                     case Constant.TRAIN:
                         tvTicketPrice.setText("20");
+                        ticketPrice=20;
                         break;
                 }
             }else if(city==Constant.VAN){
                 switch (vehicle){
                     case Constant.BUS:
                         tvTicketPrice.setText("300");
+                        ticketPrice=300;
                         break;
                     case Constant.FLIGHT:
                         tvTicketPrice.setText("500");
+                        ticketPrice=500;
                         break;
                     case Constant.TRAIN:
                         tvTicketPrice.setText("400");
+                        ticketPrice=400;
                         break;
                 }
             }

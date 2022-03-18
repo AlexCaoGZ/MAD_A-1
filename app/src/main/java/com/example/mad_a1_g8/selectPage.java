@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -20,9 +21,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class selectPage extends AppCompatActivity {
+public class selectPage extends AppCompatActivity implements AdapterView.OnItemClickListener {
     //we hardcode a lot things here
     private ListView lv;
 
@@ -42,13 +45,13 @@ public class selectPage extends AppCompatActivity {
 
     Bundle bundle=new Bundle();
     int vehicle=0;
+    String pagePurpose = "";
+    String dest = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_page);
-        String pagePurpose = "";
-        String dest = "";
 
         //get the intent, this activity only care about dest and pagePurpose
         Intent intent = getIntent();
@@ -74,10 +77,16 @@ public class selectPage extends AppCompatActivity {
             }
             else if (dest.equals("Toronto")) {
                 //this time load the String[]hotel
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, hotelTORwithPrice);
-                lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-                lv.setAdapter(adapter);
+                //ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, hotelTORwithPrice);
+                //lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                //lv.setAdapter(adapter);
+                List<Item> list=getData();
+                LayoutInflater inflater = getLayoutInflater();
+                myAdapter myAdapter=new myAdapter(selectPage.this,list);
+                lv.setOnItemClickListener(this);
+                lv.setAdapter(myAdapter);
 
+                /*
                 //return the selected hotel
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -90,12 +99,16 @@ public class selectPage extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                 */
             }
             else if (dest.equals("Vancouver")) {
                 //Same stuff
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, hotelVANwithPrice);
-                lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-                lv.setAdapter(adapter);
+                List<Item> list=getData();
+                LayoutInflater inflater = getLayoutInflater();
+                myAdapter myAdapter=new myAdapter(selectPage.this,list);
+                lv.setAdapter(myAdapter);
+
                 //Same stuff too
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -190,5 +203,34 @@ public class selectPage extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    List<Item> getData(){
+        List<Item> list=new ArrayList<Item>();
+
+        if(dest.equals("Toronto")){
+            Item TORhotelA = new Item("TorhotelA","$20/night","3 Star","10 somewhere ave, Tor",0);
+            Item TORhotelB = new Item("TorhotelB","$30/night","3 Star","20 somewhere ave, Tor",0);
+            list.add(TORhotelA);
+            list.add(TORhotelB);
+        }else{
+            Item VANhotelA = new Item("VANhotelA","$15/night","3 Star","10 somewhere ave, Tor",0);
+            Item VANhotelB = new Item("VANhotelA","$25/night","3 Star","20 somewhere ave, Tor",0);
+            list.add(VANhotelA);
+            list.add(VANhotelA);
+        }
+
+
+        return list;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(selectPage.this, MainActivity.class);
+        bundle.putString("hotel",hotelTOR[i]);
+        bundle.putInt("hotelPrice",hotelTORPrice[i]);
+        bundle.putInt("vehicle",vehicle);
+        intent.putExtra("bundle", bundle);
+        startActivity(intent);
     }
 }

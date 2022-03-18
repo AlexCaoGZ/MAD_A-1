@@ -123,6 +123,7 @@ public class summary extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(summary.this,"Thank you for your cooperation.",Toast.LENGTH_LONG).show();
+                //upload to database
             }
         });
     }
