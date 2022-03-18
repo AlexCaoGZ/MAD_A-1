@@ -31,6 +31,9 @@ public class summary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        //Load data from database and put them in list view
+
+
+
+
     }
 }
