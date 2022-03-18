@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //get TextViews ready
-        TextView tvCity=findViewById(R.id.tvCity);
+        //TextView tvCity=findViewById(R.id.tvCity);
         TextView tvTicketPrice=findViewById(R.id.tvTicketPrice);
         TextView tvHotle=findViewById(R.id.tvHotle);
         TextView tvHotlePrice=findViewById(R.id.tvHotlePrice);
@@ -109,29 +109,19 @@ public class MainActivity extends AppCompatActivity {
 
         //set the destination and hotle's name
         tvTicketPrice.setText(String.valueOf(ticketPrice));
-        tvCity.setText(dest);
+        //tvCity.setText(dest);
         tvHotle.setText(hotel);
         tvSightPrice.setText(String.valueOf(sightPrice));
 
         //buttons
-        Button btnAdd=findViewById(R.id.btnAdd);
+        //Button btnAdd=findViewById(R.id.btnAdd);
         Button btnHotel=findViewById(R.id.btnHotel);
-        Button btnFindHotel=findViewByID(R.id.btnFindHotel);
+        Button btnFindHotel=findViewById(R.id.btnFindHotel);
         Button btnSight=findViewById(R.id.btnSight);
         Button btnSummary=findViewById(R.id.btnSummary);
 
         //the button that go to selectPage.java
         //it will carry Purpose will it.
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,selectPage.class);
-                String Purpose="dest";
-                bundle.putString("Purpose",Purpose);
-                intent.putExtra("bundle",bundle);
-                startActivity(intent);
-            }
-        });
 
         //the button that go to selectPage.java, but in hotel selecting mode
         //Since start a new activity will kill the old one, we need to carry those vars from the old one with us.
