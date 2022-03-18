@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="MissingClass">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="10dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="0dp">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,16 +29,56 @@
                 android:text="dest city:"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/tvCity"
-                android:layout_width="200dp"
-                android:layout_height="27dp"
-                android:textSize="20sp" />
+            <Spinner
+                android:id="@+id/citySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rG_vehicle">
+
+                <RadioButton
+                    android:id="@+id/rB_flight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Flight" />
+
+                    <RadioButton
+                        android:id="@+id/rB_bus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Bus" />
+
+                    <RadioButton
+                    android:id="@+id/rB_train"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Train" />
+                </RadioGroup>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="83dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="$" />
 
@@ -43,13 +87,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnAdd"
+
+        <View
+            android:id="@+id/separatorLine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select city" />
+            android:layout_height="1dp"
+            android:layout_below="@+id/totalLabel"
+            android:layout_alignLeft="@+id/totalLabel"
+            android:background="@android:color/black"
+            android:padding="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

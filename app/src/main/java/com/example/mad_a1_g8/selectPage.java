@@ -25,8 +25,6 @@ import java.util.List;
 public class selectPage extends AppCompatActivity {
     //we hardcode a lot things here
     private ListView lv;
-    String[] cities={"Toronto    114Km  $11","Vancouver   4,171Km   $417"};
-    int[] ticketPrice={11,417};
 
     String[] hotelTOR={"TORhotelA","TORhotelB"};
     String[] hotelTORwithPrice={"TORhotelA   $20/Night","TORhotelB  $30/Night"};
@@ -43,6 +41,7 @@ public class selectPage extends AppCompatActivity {
     int[] sightVANPrice={60,70};
 
     Bundle bundle=new Bundle();
+    int vehicle=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +56,7 @@ public class selectPage extends AppCompatActivity {
             bundle = intent.getBundleExtra("bundle");
             dest = bundle.getString("dest");
             pagePurpose=bundle.getString("Purpose");
+            vehicle=bundle.getInt("vehicle");
         }
 
         //peparae our ListView
@@ -66,25 +66,7 @@ public class selectPage extends AppCompatActivity {
         Button btnAddSight=findViewById(R.id.btnAddSight);
 
         //show different content based on "pagePurpose"
-        if (pagePurpose.equals("dest")) {   //selecting destination
-
-            //load the String[]cities into adapter, then load into ListView
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(selectPage.this, android.R.layout.simple_list_item_single_choice, cities);
-            lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            lv.setAdapter(adapter);
-
-            //this Listener will return the destination to MainActivity
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(selectPage.this, MainActivity.class);
-                    bundle.putString("dest",cities[i]);
-                    bundle.putInt("ticketPrice",ticketPrice[i]);
-                    intent.putExtra("bundle", bundle);
-                    startActivity(intent);
-                }
-            });
-        } else if (pagePurpose.equals("hotel")) {   //selecting hotel
+        if (pagePurpose.equals("hotel")) {   //selecting hotel
 
             if (dest.equals("N/a")) {
                 //dest did not selected, cant show the hotels
@@ -103,6 +85,7 @@ public class selectPage extends AppCompatActivity {
                         Intent intent = new Intent(selectPage.this, MainActivity.class);
                         bundle.putString("hotel",hotelTOR[i]);
                         bundle.putInt("hotelPrice",hotelTORPrice[i]);
+                        bundle.putInt("vehicle",vehicle);
                         intent.putExtra("bundle", bundle);
                         startActivity(intent);
                     }
@@ -120,6 +103,7 @@ public class selectPage extends AppCompatActivity {
                         Intent intent = new Intent(selectPage.this, MainActivity.class);
                         bundle.putString("hotel",hotelVAN[i]);
                         bundle.putInt("hotelPrice",hotelVANPrice[i]);
+                        bundle.putInt("vehicle",vehicle);
                         intent.putExtra("bundle", bundle);
                         startActivity(intent);
                     }
