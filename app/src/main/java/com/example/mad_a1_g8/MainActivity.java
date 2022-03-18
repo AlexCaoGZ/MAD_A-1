@@ -13,10 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.net.Uri;
@@ -30,9 +34,15 @@ public class MainActivity extends AppCompatActivity {
     int hotelPrice=0;
     int hotelNigths=0;
     int sightPrice=0;
+    int vehicle=0;
+    int city=0;
 
     Bundle bundle=new Bundle();
     ArrayList<String> arrayList = new ArrayList<>();
+
+    TextView tvTicketPrice=null;
+
+    StringBuilder sb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +82,75 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //get TextViews ready
-        //TextView tvCity=findViewById(R.id.tvCity);
-        TextView tvTicketPrice=findViewById(R.id.tvTicketPrice);
+        tvTicketPrice=findViewById(R.id.tvTicketPrice);
         TextView tvHotle=findViewById(R.id.tvHotle);
         TextView tvHotlePrice=findViewById(R.id.tvHotlePrice);
         TextView tvHotleNights=findViewById(R.id.tvHotleNights);
         TextView tvSightPrice=findViewById(R.id.tvSightPrice);
+
+        //get spinner ready
+        Spinner citySpinner = findViewById(R.id.citySpinner);
+        String[] citySpinnerList={"Toronto    114Km","Vancouver   4,171Km"};
+        ArrayAdapter<String> citySpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,citySpinnerList);
+        citySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(citySpinnerAdapter);
+
+        if(dest=="Toronto"){
+            citySpinner.setSelection(0);
+        }else{
+            citySpinner.setSelection(1);
+        }
+
+        //select event for spinner
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i==1){
+                    city=Constant.VAN;
+                    dest="Vancouver";
+                }else{
+                    city=Constant.TOR;
+                    dest="Toronto";
+                }
+                ticketPriceCalculator();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        RadioGroup rg_vehicle = findViewById(R.id.rG_vehicle);
+        RadioButton rb_flight = findViewById(R.id.rB_flight);
+        RadioButton rb_bus = findViewById(R.id.rB_bus);
+        RadioButton rb_train = findViewById(R.id.rB_train);
+
+        if(vehicle==Constant.TRAIN){
+            rb_train.setChecked(true);
+        }else if(vehicle==Constant.BUS){
+            rb_bus.setChecked(true);
+        }else if(vehicle==Constant.FLIGHT){
+            rb_flight.setChecked(true);
+        }
+
+        rg_vehicle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i){
+                    case R.id.rB_bus:
+                        vehicle=Constant.BUS;
+                        break;
+                    case R.id.rB_flight:
+                        vehicle=Constant.FLIGHT;
+                        break;
+                    case R.id.rB_train:
+                        vehicle = Constant.TRAIN;
+                        break;
+                }
+                ticketPriceCalculator();
+            }
+        });
 
         //SeekBar for selecting how many nights
         SeekBar sbNights=(SeekBar)findViewById(R.id.nightsSeekBar);
@@ -196,6 +269,42 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    void ticketPriceCalculator(){
+        if(city!=0&&vehicle!=0){
+            if(city==Constant.TOR){
+                switch (vehicle){
+                    case Constant.BUS:
+                        tvTicketPrice.setText("11");
+                        ticketPrice=11;
+                        break;
+                    case Constant.FLIGHT:
+                        tvTicketPrice.setText("200");
+                        ticketPrice=200;
+                        break;
+                    case Constant.TRAIN:
+                        tvTicketPrice.setText("20");
+                        ticketPrice=20;
+                        break;
+                }
+            }else if(city==Constant.VAN){
+                switch (vehicle){
+                    case Constant.BUS:
+                        tvTicketPrice.setText("300");
+                        ticketPrice=300;
+                        break;
+                    case Constant.FLIGHT:
+                        tvTicketPrice.setText("500");
+                        ticketPrice=500;
+                        break;
+                    case Constant.TRAIN:
+                        tvTicketPrice.setText("400");
+                        ticketPrice=400;
+                        break;
+                }
+            }
+        }
     }
 
 }
