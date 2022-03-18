@@ -8,10 +8,13 @@
 
 package com.example.mad_a1_g8;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -269,6 +272,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_menu,menu);
+        sb = new StringBuilder();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menuDatas){
+            Intent intent = new Intent(MainActivity.this, Database.class);
+            Bundle extras = new Bundle();
+            extras.putString("dest", dest);
+            extras.putString("hotel", hotel);
+            extras.putInt("hotelNigths", hotelNigths);
+            extras.putInt("hotelPrice", hotelPrice);
+            extras.putInt("sightPrice",sightPrice);
+            extras.putInt("hotelNigths", hotelNigths);
+            intent.putExtra("bundle", extras);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     void ticketPriceCalculator(){
