@@ -170,21 +170,34 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnHotel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp"
             android:text="Select Hotel" />
+
         <Button
             android:id="@+id/btnFindHotel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Find A Hotel Online" />
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:text="Find Hotel Online" />
+
+
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">>
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView3"
