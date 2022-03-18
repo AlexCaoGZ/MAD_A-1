@@ -1,6 +1,6 @@
 /*  FILE            : selectPage.java
  *  PROJECT         : PROG3150
- *  PROGRAMMER      : Justin Funk & Yutong Ji & Tong Mu & Zijia Cao
+ *  PROGRAMMER      : Justin Fink & Yutong Ji & Tong Mu & Zijia Cao
  *  FIRST VERSION   : 2022/02/09
  *  DESCRIPTION     : This file is the selection screen of this Android application, it can
  *                    show 3 different contents depending on the information contained in the intent.
