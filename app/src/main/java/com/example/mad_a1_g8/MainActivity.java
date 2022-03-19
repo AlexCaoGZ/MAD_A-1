@@ -13,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.view.Menu;
 import android.view.MenuItem;
+=======
+>>>>>>> parent of dcadf92 (list/detail complete)
 =======
 >>>>>>> parent of dcadf92 (list/detail complete)
 import android.view.View;

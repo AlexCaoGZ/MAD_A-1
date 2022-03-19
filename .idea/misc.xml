@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry key="..\:/MAD_A-1/app/src/main/res/layout/activity_database.xml" value="0.3234375" />
         <entry key="..\:/MAD_A-1/app/src/main/res/layout/activity_select_page.xml" value="0.3234375" />
         <entry key="..\:/MAD_A-1/app/src/main/res/layout/activity_summary.xml" value="0.3234375" />
@@ -11,6 +12,11 @@
         <entry key="..\:/MAD_A-1/app/src/main/res/layout/latest_travel_news_main.xml" value="0.4230072463768116" />
         <entry key="..\:/MAD_A-1/app/src/main/res/layout/list.xml" value="0.3234375" />
         <entry key="..\:/MAD_A-1/app/src/main/res/layout/listview_for_travel_news.xml" value="0.3234375" />
+=======
+        <entry key="..\:/SchoolStuff/Code/2022_Winter/MAD/MADA#1/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/SchoolStuff/Code/2022_Winter/MAD/MADA#1/app/src/main/res/layout/activity_select_page.xml" value="0.25" />
+        <entry key="..\:/SchoolStuff/Code/2022_Winter/MAD/MADA#1/app/src/main/res/layout/activity_summary.xml" value="0.33" />
+>>>>>>> parent of dcadf92 (list/detail complete)
 =======
         <entry key="..\:/SchoolStuff/Code/2022_Winter/MAD/MADA#1/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/SchoolStuff/Code/2022_Winter/MAD/MADA#1/app/src/main/res/layout/activity_select_page.xml" value="0.25" />
