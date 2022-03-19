@@ -35,5 +35,15 @@ public class summary extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
+=======
+        //Thank you for your patience all the way to read here.
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(summary.this,"Thank you for your cooperation.",Toast.LENGTH_LONG).show();
+            }
+        });
+>>>>>>> parent of dcadf92 (list/detail complete)
     }
 }
