@@ -11,13 +11,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MAD_A1_G8">
         <activity
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             android:name=".WebViewActivity"
             android:exported="false" />
         <activity
             android:name=".Database"
             android:exported="false" />
         <activity
-
+=======
+>>>>>>> parent of dcadf92 (list/detail complete)
+=======
+>>>>>>> parent of dcadf92 (list/detail complete)
+=======
+>>>>>>> parent of dcadf92 (list/detail complete)
+            android:name=".summary"
+            android:exported="false" />
         <activity
             android:name=".selectPage"
             android:exported="false" />
