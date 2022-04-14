@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
@@ -65,6 +68,9 @@ public class submitData extends AppCompatActivity {
         TextView tvSumHotel = findViewById(R.id.tvSumHotel);
         TextView tvSumHotelNights = findViewById(R.id.tvSumHotelNights);
         TextView tvSum = findViewById(R.id.tvSum);
+
+        //Dialog declarations
+        TextView dialogTextView = findViewById(R.id.dialogTextView);
 
         //set the price tag
         tvSum.setText("$"+String.valueOf(sum));
@@ -123,6 +129,28 @@ public class submitData extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Pop up dialog message here for are you sure
+                new AlertDialog.Builder(submitData.this)
+                        .setMessage("Are you sure you want to submit the data?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogTextView.setText("You selected Yes! Data Submitted!");
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogTextView.setText("You selected No! Data NOT submitted!");
+                            }
+                        })
+                        .setNeutralButton("Whatever", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogTextView.setText("You selected Whatever! Data submitted... Maybe?");
+                            }
+                        })
+                        .show();
                 //Need to make it so that when the user presses this button then all the
                 // information is added to a database
 
